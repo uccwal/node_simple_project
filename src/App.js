@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import Home from './components/home';
 import Community from './components/community';
 import Mypage from './components/mypage';
+import CheckSMS from "./components/checkSMS";
 
 export default class App extends Component {
 
@@ -19,6 +20,7 @@ export default class App extends Component {
                 <Link to='/'><li>Home</li></Link>
                 <Link to='/community'><li>Community</li></Link>
                 <Link to='/mypage'><li>MyPage</li></Link>
+                <Link to='/checkSMS'><li>CheckSMS</li></Link>
               </ul>
             </div>
             <div className='Contents-wrapper'>
@@ -26,6 +28,7 @@ export default class App extends Component {
                 <Route exact path='/' element={<Home/>} />
                 <Route path='/community' element={<Community/>} />
                 <Route path='/mypage' element={<Mypage/>} />
+                <Route path='/checkSMS' element={<CheckSMS/>} />
               </Routes>
             </div>
           </Router>
