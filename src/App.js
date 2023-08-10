@@ -1,43 +1,38 @@
 import React, { Component } from 'react'
 import './App.css';
+import UseSample from "./components/useSample";
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+
+import Home from './components/home';
+import Community from './components/community';
+import Mypage from './components/mypage';
+
 export default class App extends Component {
-  state = {
-    testbody : "",
-  }
 
-  handleChange =(e)=>{
-    this.setState({
-      [e.target.name] : e.target.value,
-    });
-  }
-
-  submitId = ()=>{
-    const post ={
-      test : this.state.testbody,
-    };
-
-    fetch("http://localhost:3001/idplz", {
-      method : "post", // 통신방법
-      headers : {
-        "content-type" : "application/json",
-      },
-      body : JSON.stringify(post),
-    })
-        .then((res)=>res.json())
-        .then((json)=>{
-          this.setState({
-            testbody : json.text,
-          });
-        });
-  };
 
   render() {
     return (
-        <div>
-          <input onChange={this.handleChange} name ="testbody"/>
-          <button onClick = {this.submitId}>Submit</button>
-          <h1>{this.state.testbody}</h1>
+        <div className="App">
+          <Router>
+            <div className='Menu-wrapper'>
+              <ul>
+                <Link to='/'><li>Home</li></Link>
+                <Link to='/community'><li>Community</li></Link>
+                <Link to='/mypage'><li>MyPage</li></Link>
+              </ul>
+            </div>
+            <div className='Contents-wrapper'>
+              <Routes>
+                <Route exact path='/' element={<Home/>} />
+                <Route path='/community' element={<Community/>} />
+                <Route path='/mypage' element={<Mypage/>} />
+              </Routes>
+            </div>
+          </Router>
+
+
         </div>
+
     )
   }
 }
