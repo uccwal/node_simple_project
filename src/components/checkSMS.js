@@ -1,20 +1,22 @@
 import React from 'react';
-import {TextField} from "@mui/material";
-import Checkbox from '@mui/material/Checkbox';
+import CheckForm from "./checkSMS/checkForm";
+
+
+
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const CheckSms = () => {
+
+    const checkBoxFlex = {
+        display:"flex",
+        justifyContent: "center"
+    }
     return (
-        <div>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <div style={checkBoxFlex}>
+            <CheckForm/>
 
-
-        <Checkbox {...label} defaultChecked />
-        <Checkbox {...label} />
-        <Checkbox {...label} disabled />
-        <Checkbox {...label} disabled checked />
-    </div>
+        </div>
     );
 };
 
