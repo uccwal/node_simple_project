@@ -1,26 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css';
-import UseSample from "./components/useSample";
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+
+
 
 import Home from './components/home';
 import Community from './components/community';
 import Mypage from './components/mypage';
 import CheckSMS from "./components/checkSMS";
+import UseToastGrid from "./components/useToastGrid";
+import UseAjaxGetData from "./components/useAjaxGetData";
+import 'tui-grid/dist/tui-grid.css';
 
-export default class App extends Component {
+function App() {
 
 
-  render() {
+
     return (
         <div className="App">
+
+업데이트 ㅎ
+
           <Router>
             <div className='Menu-wrapper'>
-              <ul>
+              <ul style={{listStyle:'none'}}>
                 <Link to='/'><li>Home</li></Link>
                 <Link to='/community'><li>Community</li></Link>
                 <Link to='/mypage'><li>MyPage</li></Link>
                 <Link to='/checkSMS'><li>CheckSMS</li></Link>
+                <Link to='/useAjaxGetData'><li>useAjaxGetData</li></Link>
+                <Link to='/useToastGrid'><li>useAjaxGetData</li></Link>
               </ul>
             </div>
             <div className='Contents-wrapper'>
@@ -29,6 +38,8 @@ export default class App extends Component {
                 <Route path='/community' element={<Community/>} />
                 <Route path='/mypage' element={<Mypage/>} />
                 <Route path='/checkSMS' element={<CheckSMS/>} />
+                <Route path='/useAjaxGetData' element={<UseAjaxGetData/>} />
+                <Route path='/useToastGrid' element= {<UseToastGrid/>}/>
               </Routes>
             </div>
           </Router>
@@ -38,4 +49,4 @@ export default class App extends Component {
 
     )
   }
-}
+export default App;

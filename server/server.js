@@ -25,9 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) =>{
-    res.send('혁이는 코딩 중!')
-})
 
 app.post("/idplz", (req,res)=>{
     const test = req.body.test;
@@ -45,6 +42,45 @@ app.post("/idplz", (req,res)=>{
 
 
 });
+
+app.post("/insert", (req,res)=>{
+    const { name, gender, number, code } = req.body;
+    // console.log(req.body);
+    connection.query("INSERT INTO sample (name, gender, number, code) values (?, ?, ?, ?)",[
+        name, gender, number, code
+        ],
+        function(err,rows,fields){
+            if(err){
+                console.log("실패");
+                // console.log(err);
+            }else{
+                console.log("성공");
+                // console.log(rows);
+            };
+        });
+
+
+});
+
+
+app.get("/list", (req,res)=>{
+
+    // console.log(req.body);
+    connection.query("SELECT * FROM sample",
+        function(err,rows,fields){
+            if(err){
+                console.log("실패");
+                // console.log(err);
+            }else{
+                console.log("성공");
+                console.log(rows);
+                res.status(200).json(rows);
+            };
+        });
+
+
+});
+
 
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`);

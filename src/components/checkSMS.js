@@ -3,9 +3,6 @@ import CheckForm from "./checkSMS/checkForm";
 
 
 
-
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const CheckSms = () => {
 
     const checkBoxFlex = {
@@ -16,7 +13,9 @@ const CheckSms = () => {
         <div style={checkBoxFlex}>
             <CheckForm/>
 
+
         </div>
+
     );
 };
 

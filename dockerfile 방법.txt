@@ -1,0 +1,44 @@
+리액트 앱을 Nginx를 사용하여 배포하기 위한 도커 파일의 예시입니다.
+
+# 리액트 프로젝트 빌드하기:
+
+먼저, 리액트 프로젝트를 빌드하여 정적 파일을 생성합니다. 이 단계는 미리 진행되어야 합니다.
+
+도커 파일 생성:
+
+프로젝트 폴더에 Dockerfile이라는 파일을 생성하고 편집합니다.
+
+---------------------------
+# 첫 번째 단계: 리액트 프로젝트 빌드
+FROM node:14 AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# 두 번째 단계: Nginx를 사용한 정적 파일 서버
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+---------------------------
+
+# 도커 이미지 빌드:
+
+터미널을 열고 프로젝트 폴더에서 아래 명령을 실행하여 도커 이미지를 빌드합니다.
+
+docker build -t react-app-nginx .
+
+여기서 react-app-nginx는 이미지 이름으로 원하는 이름으로 변경할 수 있습니다.
+
+# 도커 컨테이너 실행:
+
+이미지를 사용하여 Nginx 컨테이너를 실행합니다. 여기서 80번 포트를 호스트의 어떤 포트와 연결할 것인지 결정해야 합니다. 아래 예시에서는 호스트의 8080 포트와 Nginx 컨테이너의 80번 포트를 연결합니다.
+
+docker run -d -p 8080:80 react-app-nginx
+
+# 웹 브라우저에서 확인:
+
+이제 웹 브라우저에서 http://localhost:8080로 접속하여 배포한 리액트 앱을 확인할 수 있습니다.

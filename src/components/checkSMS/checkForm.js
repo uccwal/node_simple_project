@@ -31,7 +31,7 @@ const CheckForm = () => {
     const handleSubmit = () => {
         const jsonData = JSON.stringify(formData);
 
-        axios.post('YOUR_API_URL', jsonData, {
+        axios.post('http://localhost:3001/insert', jsonData, {
             headers: {
                 'Content-Type': 'application/json',
             },
